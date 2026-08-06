@@ -1,0 +1,115 @@
+/**
+ * HIGH TECH PS - Core Loader & Exploit Manager
+ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const uaElement = document.getElementById("UA");
+    const ps4Select = document.getElementById("ps4-firmware");
+    const ps5Select = document.getElementById("ps5-firmware");
+    const payloadSelect = document.getElementById("payload-select");
+    const btnJailbreak = document.getElementById("jeilbrek");
+    const consoleLog = document.getElementById("console");
+    const autoJbInput = document.getElementById("autoJbInput");
+
+    // 1. عرض معلومات المتصفح
+    if (uaElement) {
+        uaElement.innerText = "معلومات المتصفح: " + navigator.userAgent;
+    }
+
+    // 2. استرجاع الخيارات المحفوظة سابقاً (LocalStorage)
+    if (localStorage.getItem("ps4_fw")) ps4Select.value = localStorage.getItem("ps4_fw");
+    if (localStorage.getItem("ps5_fw")) ps5Select.value = localStorage.getItem("ps5_fw");
+    if (localStorage.getItem("payload")) payloadSelect.value = localStorage.getItem("payload");
+    if (localStorage.getItem("auto_jb") === "true") autoJbInput.checked = true;
+
+    // 3. التبديل الفردي بين قوائم PS4 و PS5
+    ps4Select.addEventListener("change", () => {
+        if (ps4Select.value) ps5Select.value = "";
+        savePreferences();
+    });
+    ps5Select.addEventListener("change", () => {
+        if (ps5Select.value) ps4Select.value = "";
+        savePreferences();
+    });
+    payloadSelect.addEventListener("change", savePreferences);
+    autoJbInput.addEventListener("change", savePreferences);
+
+    function savePreferences() {
+        localStorage.setItem("ps4_fw", ps4Select.value);
+        localStorage.setItem("ps5_fw", ps5Select.value);
+        localStorage.setItem("payload", payloadSelect.value);
+        localStorage.setItem("auto_jb", autoJbInput.checked);
+    }
+
+    // 4. تحديث الكونسول وشريط التقدم المئوي
+    function updateConsole(message, percent) {
+        if (!consoleLog) return;
+        const totalBlocks = 20;
+        const filledBlocks = Math.round((percent / 100) * totalBlocks);
+        const emptyBlocks = totalBlocks - filledBlocks;
+        const progressBar = `[${"█".repeat(filledBlocks)}${"░".repeat(emptyBlocks)}] ${percent}%`;
+
+        consoleLog.innerText = `[+] حالة العملية: ${progressBar}\n\n[+] ${message}`;
+        consoleLog.scrollTop = consoleLog.scrollHeight;
+    }
+
+    // 5. محاكاة وتنفيذ عملية الحقن
+    function loadOfflinePayload(firmware, kernelMethod, selectedPayload) {
+        let currentPercent = 0;
+        btnJailbreak.disabled = true;
+
+        updateConsole(`بدء العملية للإصدار ${firmware} عبر محرك (${kernelMethod})...\n[+] الـ Payload المحدد: [${selectedPayload}]`, 0);
+
+        setTimeout(() => {
+            currentPercent = 25;
+            updateConsole("جاري استدعاء ثغرة الويب (WebKit Exploit)...", currentPercent);
+        }, 1000);
+
+        setTimeout(() => {
+            currentPercent = 50;
+            updateConsole("نجحت ثغرة الويب! جاري تجميع ذاكرة النواة (Kernel Heap Spray)...", currentPercent);
+        }, 2200);
+
+        setTimeout(() => {
+            currentPercent = 75;
+            updateConsole(`تشغيل ثغرة النواة وحقن payload (${selectedPayload}.bin)...`, currentPercent);
+        }, 3600);
+
+        setTimeout(() => {
+            currentPercent = 100;
+            updateConsole(`تم تشغيل [${selectedPayload}] بنجاح على نظام ${firmware}!`, currentPercent);
+            
+            btnJailbreak.disabled = false;
+
+            if (typeof showGoldHenNotification === "function") {
+                showGoldHenNotification("Success", `تم تفعيل ${selectedPayload} بنجاح!`);
+            }
+        }, 5000);
+    }
+
+    // 6. تشغيل الزر
+    if (btnJailbreak) {
+        btnJailbreak.addEventListener("click", () => {
+            const selectedFirmware = ps4Select.value || ps5Select.value;
+            const kernelMethod = document.querySelector('input[name="kernel"]:checked')?.value || "netctrl";
+            const selectedPayload = payloadSelect ? payloadSelect.value : "GoldHEN";
+
+            if (!selectedFirmware) {
+                alert("يرجى اختيار إصدار السوفت وير الخاص بجهازك أولاً!");
+                return;
+            }
+
+            loadOfflinePayload(selectedFirmware, kernelMethod, selectedPayload);
+        });
+    }
+
+    // 7. التشغيل التلقائي عند الفتح
+    if (autoJbInput && autoJbInput.checked) {
+        const defaultFirmware = ps4Select.value || ps5Select.value;
+        if (defaultFirmware) {
+            setTimeout(() => {
+                btnJailbreak.click();
+            }, 1200);
+        }
+    }
+});

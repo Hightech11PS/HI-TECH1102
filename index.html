@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" manifest="cache.manifest">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIGH TECH PS - مركز صيانة بلاي ستيشن</title>
+  <link rel="stylesheet" href="includes/style.css">
+</head>
+<body>
+
+  <h1>HIGH TECH PS</h1>
+  <h2>مركز صيانة بلاي ستيشن</h2>
+  
+  <div class="user-agent-info" id="UA">جاري فحص الجهاز...</div>
+
+  <!-- اللوجو -->
+  <div class="logo-container">
+    <img src="assets/logo.png" id="main-logo" alt="HIGH TECH PS Logo" onerror="this.style.display='none'">
+  </div>
+
+  <hr style="border-color: #222; margin: 15px 0;">
+
+  <!-- خيارات PS4 -->
+  <div class="select-group">
+    <h3 class="section-title">إصدارات وتعديلات PS4</h3>
+    <br>
+    <select class="firmware-select" id="ps4-firmware">
+      <option value="">اختر إصدار PS4...</option>
+      <optgroup label="إصدارات التعديل (Jailbreak)">
+        <option value="5.05">Firmware 5.05 (HEN / GoldHEN)</option>
+        <option value="6.72">Firmware 6.72 (HEN / GoldHEN)</option>
+        <option value="7.02">Firmware 7.02 (HEN / GoldHEN)</option>
+        <option value="7.55">Firmware 7.55 (HEN / GoldHEN)</option>
+        <option value="9.00">Firmware 9.00 (pPSSipow / GoldHEN)</option>
+        <option value="11.00">Firmware 11.00 (PPPwn)</option>
+      </optgroup>
+      <optgroup label="إصدارات رسمية أخرى">
+        <option value="9.03">Firmware 9.03</option>
+        <option value="9.50">Firmware 9.50</option>
+        <option value="10.00">Firmware 10.00</option>
+        <option value="10.01">Firmware 10.01</option>
+        <option value="10.50">Firmware 10.50</option>
+        <option value="11.02">Firmware 11.02</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <!-- خيارات PS5 -->
+  <div class="select-group">
+    <h3 class="section-title">إصدارات وتعديلات PS5</h3>
+    <br>
+    <select class="firmware-select" id="ps5-firmware">
+      <option value="">اختر إصدار PS5...</option>
+      <optgroup label="إصدارات تعديل PS5">
+        <option value="1.xx">Firmware 1.xx (1.00 - 1.14)</option>
+        <option value="2.xx">Firmware 2.xx (2.00 - 2.70)</option>
+        <option value="3.xx">Firmware 3.00 - 3.21</option>
+        <option value="4.03">Firmware 4.03 (ETAHEN / Mast1c0re)</option>
+        <option value="4.50">Firmware 4.50 (ETAHEN)</option>
+        <option value="4.51">Firmware 4.51 (ETAHEN / UMTX)</option>
+        <option value="5.00-5.50">Firmware 5.00 - 5.50 (UMTX)</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <!-- خيارات الـ Payloads الإضافية -->
+  <div class="select-group">
+    <h3 class="section-title">اختر الـ Payload المطلوب</h3>
+    <br>
+    <select class="firmware-select" id="payload-select">
+      <option value="GoldHEN">GoldHEN (الافتراضي - تفعيل الألعاب والحزم)</option>
+      <option value="WebRTE">WebRTE (تفعيل الغش والأكواد في الألعاب)</option>
+      <option value="Linux Loader">Linux Loader (تشغيل نظام لينكس)</option>
+      <option value="PS4Debug">PS4Debug (للمطورين وتعديل الذاكرة)</option>
+      <option value="FTP Server">FTP Server (نقل الملفات عبر الشبكة)</option>
+    </select>
+  </div>
+
+  <!-- خيارات التحميل والتشغيل -->
+  <div class="btn-container">
+    <div class="radio-group">
+      <label for="netctrl-exploit">
+        <input type="radio" name="kernel" id="netctrl-exploit" value="netctrl" checked> NetCtrl
+      </label>
+      <label for="lapse-exploit">
+        <input type="radio" name="kernel" id="lapse-exploit" value="lapse"> Lapse
+      </label>
+    </div>
+
+    <button id="jeilbrek" class="btn-submit">تشغيل التعديل</button>
+
+    <div class="autoJb">
+      <input id="autoJbInput" type="checkbox">
+      <label for="autoJbInput" id="autoJbLabel">تشغيل تلقائي عند الفتح</label>
+    </div>
+  </div>
+
+  <!-- نافذة الكونسول للمخرجات -->
+  <div class="console-wrapper">
+    <pre id="console">[+] جاهز للبدء... awaiting execution</pre>
+  </div>
+
+  <!-- استدعاء ملفات الجافاسكريبت -->
+  <script src="includes/script.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  padding: 20px;
+  line-height: 1.6;
+}
+h1 {
+  color: #00a2ff;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+h2 {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 15px;
+}
+.user-agent-info {
+  font-size: 0.85rem;
+  background: #1e1e1e;
+  display: inline-block;
+  padding: 6px 15px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  color: #00a2ff;
+  border: 1px solid rgba(0, 162, 255, 0.3);
+}
+.logo-container img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 162, 255, 0.3);
+  margin: 10px 0 20px 0;
+  transition: transform 0.3s ease;
+}
+.logo-container img:hover {
+  transform: scale(1.02);
+}
+.select-group {
+  margin-bottom: 15px;
+}
+.section-title {
+  color: #00a2ff;
+  margin: 15px 0 10px 0;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #00a2ff;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+.firmware-select {
+  width: 90%;
+  max-width: 400px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #00a2ff;
+  background-color: #1e1e1e;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.firmware-select:focus {
+  border-color: #00d4ff;
+  box-shadow: 0 0 8px rgba(0, 162, 255, 0.5);
+}
+.btn-container {
+  margin: 25px 0;
+}
+.radio-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.radio-group label {
+  cursor: pointer;
+  background: #1e1e1e;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #333;
+}
+.btn-submit {
+  padding: 12px 30px;
+  font-size: 17px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #0072ff, #00c6ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 114, 255, 0.4);
+  transition: opacity 0.3s, transform 0.1s;
+}
+.btn-submit:hover {
+  opacity: 0.9;
+}
+.btn-submit:active {
+  transform: scale(0.98);
+}
+.btn-submit:disabled {
+  background: #444;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.autoJb {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #ccc;
+}
+.console-wrapper {
+  max-width: 600px;
+  margin: 20px auto 0 auto;
+  text-align: right;
+}
+#console {
+  background-color: #0a0a0a;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px;
+  color: #00ff66;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  min-height: 100px;
+  max-height: 220px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  direction: ltr;
+}
